@@ -1,0 +1,57 @@
+require 'json'
+
+class Jsonpretty
+  VERSION = '1.0.0'
+
+  def file_value(filename)
+    file = if filename == '-'
+             $stdin
+           else
+             File.open(filename)
+           end
+    lines = file.readlines
+    if lines.first =~ /^HTTP\/1\./ # looks like an HTTP response; we just want the body
+      index = lines.index("\r\n") || lines.index("\n")
+      puts lines[0..index]
+      lines[(index+1)..-1].join('')
+    else
+      lines.join('')
+    end
+  ensure
+    file.close
+  end
+
+  def stdin_value
+    file_value('-')
+  end
+
+  def main
+    if ARGV.length == 0
+      ARGV.unshift stdin_value
+    else
+      ARGV.each_with_index do |v,i|
+        case v
+        when /^--?h/
+          puts("usage: #{File.basename($0)} [args|@filename|@- (stdin)]",
+               "Parse and pretty-print JSON, either from stdin or from arguments concatenated together")
+          exit 0
+        when /^--?v/
+          puts "jsonpretty version #{VERSION}"
+          exit 0
+        else
+          if v == '-'
+            ARGV[i] = stdin_value
+          elsif v =~ /^@/
+            ARGV[i] = file_value(v[1..-1])
+          end
+        end
+      end
+    end
+
+    puts JSON.pretty_generate(JSON.parse(ARGV.join(' ')))
+  rescue => e
+    $stderr.puts "jsonpretty failed: #{e.message}"
+    exit 1
+  end
+end
+
