@@ -20,3 +20,7 @@ def spec.to_ruby
 }
   super.sub(/end\n\Z/m, "#{additional_src}\nend\n")
 end
+
+task :gemspec do
+  File.open("jsonpretty.gemspec", "w") {|f| f << spec.to_ruby }
+end
