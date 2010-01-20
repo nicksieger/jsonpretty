@@ -1,3 +1,7 @@
+=== 1.1.0 / 2010-01-20
+
+* Parses and displays jsonp–flavored json
+
 === 1.0.0 / 2009-02-20
 
 * 1 major enhancement

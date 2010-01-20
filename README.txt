@@ -8,7 +8,7 @@ Command-line JSON pretty-printer, using the json gem.
 
 == FEATURES/PROBLEMS:
 
-- Parse and pretty-print JSON either from stdin or from command-line
+- Parse and pretty-print JSON/JSONP either from stdin or from command-line
   arguments.
 - All arguments are concatenated together in a single string for
   pretty-printing.
