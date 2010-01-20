@@ -24,7 +24,17 @@ class Jsonpretty
   def stdin_value
     file_value('-')
   end
-
+  
+  def clean_jsonp(input_string)
+    match = input_string.match(/^(.+)\((.+)\)$/)
+    if match
+      puts "jsonp method name: #{match[1]}\n\n"
+      match[2]
+    else
+      input_string
+    end
+  end
+  
   def main
     if ARGV.length == 0
       ARGV.unshift stdin_value
@@ -47,8 +57,10 @@ class Jsonpretty
         end
       end
     end
-
-    puts JSON.pretty_generate(JSON.parse(ARGV.join(' ')))
+    
+    input = clean_jsonp(ARGV.join(' '))
+    json = JSON.parse(input)
+    puts JSON.pretty_generate(json)
   rescue => e
     $stderr.puts "jsonpretty failed: #{e.message}"
     exit 1
