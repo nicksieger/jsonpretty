@@ -1,8 +1,6 @@
 require 'json'
 
 class Jsonpretty
-  VERSION = '1.1.0'
-
   def file_value(filename)
     file = if filename == '-'
              $stdin
@@ -10,7 +8,7 @@ class Jsonpretty
              File.open(filename)
            end
     lines = file.readlines
-    if lines.first =~ /^HTTP\/1\./ # looks like an HTTP response; we just want the body
+    if lines.first =~ /^HTTP\/\d)/ # looks like an HTTP response; we just want the body
       index = lines.index("\r\n") || lines.index("\n")
       puts lines[0..index]
       lines[(index+1)..-1].join('')
@@ -24,7 +22,7 @@ class Jsonpretty
   def stdin_value
     file_value('-')
   end
-  
+
   def clean_jsonp(input_string)
     match = input_string.match(/^(.+)\((.+)\)$/)
     if match
@@ -34,7 +32,7 @@ class Jsonpretty
       input_string
     end
   end
-  
+
   def main
     if ARGV.length == 0
       ARGV.unshift stdin_value
@@ -57,7 +55,7 @@ class Jsonpretty
         end
       end
     end
-    
+
     input = clean_jsonp(ARGV.join(' '))
     json = JSON.parse(input)
     puts JSON.pretty_generate(json)
