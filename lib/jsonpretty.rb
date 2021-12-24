@@ -8,7 +8,7 @@ class Jsonpretty
              File.open(filename)
            end
     lines = file.readlines
-    if lines.first =~ /^HTTP\/\d)/ # looks like an HTTP response; we just want the body
+    if lines.first =~ /^HTTP\/\d/ # looks like an HTTP response; we just want the body
       index = lines.index("\r\n") || lines.index("\n")
       puts lines[0..index]
       lines[(index+1)..-1].join('')
