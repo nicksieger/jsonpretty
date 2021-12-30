@@ -1,3 +1,7 @@
+=== 1.2.0 / 2021-12-30
+
+* New version to correspond with go port
+
 === 1.1.2 / 2021-12-27
 
 * Fix regex typo, thanks Sami Samhuri

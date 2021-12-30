@@ -42,4 +42,4 @@ brew gem install jsonpretty
 
 ## LICENSE
 
-See [LICENSE](LICENSE).
+See [LICENSE](LICENSE.txt).
