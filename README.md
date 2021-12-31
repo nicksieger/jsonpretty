@@ -25,19 +25,37 @@ curl -i http://api.com/json | jsonpretty
 
 ## REQUIREMENTS
 
-json or json_pure
+- For the Ruby version: any Ruby version 2 or greater installed
+- For the Go version: none for the release binary, or Go 1.17 for `go install`
 
 ## INSTALL
+
+Install the Ruby version with rubygems:
 
 ```
 gem install jsonpretty
 ```
 
-or install globally with brew-gem:
+Install the Ruby version globally with Homebrew and brew-gem:
 
 ```
 brew install brew-gem
 brew gem install jsonpretty
+```
+
+Install the Go version with `go install` (requires Go 1.17):
+
+```
+go install github.com/nicksieger/jsonpretty
+```
+
+Or install the Go version from a release with curl+tar:
+
+```
+VERSION=1.2.0
+OS=$(uname -s)
+ARCH=$(uname -m)
+curl -L https://github.com/nicksieger/jsonpretty/releases/download/v${VERSION}/jsonpretty_${VERSION}_${OS}_${ARCH}.tar.gz | sudo tar -C /usr/local/bin -zxf - jsonpretty
 ```
 
 ## LICENSE
