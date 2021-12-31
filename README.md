@@ -4,18 +4,15 @@
 
 ## DESCRIPTION
 
-Command-line JSON pretty-printer, using the json gem.
+Command-line JSON pretty-printer. Pipe any JSON output to pretty-print it with 2-space indent.
 
-## FEATURES/PROBLEMS
+## FEATURES
 
-- Parse and pretty-print JSON/JSONP either from stdin or from command-line
-  arguments.
-- All arguments are concatenated together in a single string for
-  pretty-printing.
-- Use '@filename' as an argument to include the contents of the file.
-- Use '-' or '@-' as an argument (or use no arguments) to read stdin.
-- Detects HTTP response/headers, prints them untouched, and skips to
-  the body (for use with `curl -i').
+- Parse and pretty-print JSON/JSONP either from stdin or from command-line arguments.
+- All arguments are concatenated together in a single string for pretty-printing.
+- Use `@filename` as an argument to include the contents of the file.
+- Use `-` or `@-` as an argument (or use no arguments) to read stdin.
+- Detects HTTP response/headers, prints them untouched, and skips to the body (for use with `curl -i').
 
 ## SYNOPSIS
 
@@ -25,7 +22,7 @@ curl -i http://api.com/json | jsonpretty
 
 ## REQUIREMENTS
 
-- For the Ruby version: any Ruby version 2 or greater installed
+- For the Ruby version: any Ruby version >= 2 installed
 - For the Go version: none for the release binary, or Go 1.17 for `go install`
 
 ## INSTALL
